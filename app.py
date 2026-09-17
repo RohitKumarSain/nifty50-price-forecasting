@@ -15,9 +15,7 @@ st.set_page_config(page_title="Nifty 50 Predictor", layout="centered")
 st.title("📈 Nifty 50 Next-Day Predictor")
 st.markdown("Real-time Linear Regression model trained on **20 Years of Raw OHLCV Data**.")
 
-# ------------------------------------------------------------------
-# 1. Data Fetcher & Feature Processor
-# ------------------------------------------------------------------
+# Data Fetcher & Feature Processor
 @st.cache_data(ttl=3600)
 def fetch_nifty_data():
     """Fetch 20 years of Nifty 50 data from current date."""
@@ -47,9 +45,7 @@ def prepare_baseline_data(df, target_col):
     
     return X, y
 
-# ------------------------------------------------------------------
-# 2. UI Selection
-# ------------------------------------------------------------------
+# UI Selection
 target_selection = st.radio(
     "Select Target Price to Predict:",
     options=["Open", "Close"],
@@ -94,9 +90,7 @@ if st.button("🚀 Fetch Data & Predict", type="primary"):
             
             st.success("🎉 Prediction & Evaluation Complete!")
             
-            # --------------------------------------------------------------
-            # 3. Display Metrics
-            # --------------------------------------------------------------
+            # 6. Display Metrics
             st.subheader(f"🎯 Target: Next-Day {target_selection} Price")
             col1, col2 = st.columns(2)
             col1.metric(
@@ -117,7 +111,7 @@ if st.button("🚀 Fetch Data & Predict", type="primary"):
             m2.metric("RMSE", f"₹{rmse:,.2f}")
             m3.metric("MAE", f"₹{mae:,.2f}")
             
-            # Optional plot for actual vs prediction overview
+            # 7. Optional plot for actual vs prediction overview
             st.divider()
             st.subheader(f"📈 Test Period Performance ({target_selection})")
             chart_data = pd.DataFrame({"Actual": y_test.values, "Predicted": y_pred}, index=y_test.index)
