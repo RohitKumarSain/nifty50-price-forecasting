@@ -12,7 +12,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 # Streamlit Page Config
 st.set_page_config(page_title="Nifty 50 Predictor", layout="centered")
 
-st.title("📈 Nifty 50 Next-Day Predictor")
+st.title("Nifty 50 Next-Day Predictor")
 st.markdown("Real-time Linear Regression model trained on **20 Years of Raw OHLCV Data**.")
 
 # Data Fetcher & Feature Processor
@@ -52,7 +52,7 @@ target_selection = st.radio(
     horizontal=True
 )
 
-if st.button("🚀 Fetch Data & Predict", type="primary"):
+if st.button("Fetch Data & Predict", type="primary"):
     with st.spinner("Downloading 20 years of Nifty 50 data & training Linear Regression model..."):
         raw_df = fetch_nifty_data()
         
@@ -88,10 +88,10 @@ if st.button("🚀 Fetch Data & Predict", type="primary"):
             last_date = raw_df.index[-1].strftime("%Y-%m-%d")
             delta = prediction - last_recorded_val
             
-            st.success("🎉 Prediction & Evaluation Complete!")
+            st.success("Prediction & Evaluation Complete!")
             
             # 6. Display Metrics
-            st.subheader(f"🎯 Target: Next-Day {target_selection} Price")
+            st.subheader(f"Target: Next-Day {target_selection} Price")
             col1, col2 = st.columns(2)
             col1.metric(
                 label=f"Last Recorded {target_selection} ({last_date})", 
@@ -105,7 +105,7 @@ if st.button("🚀 Fetch Data & Predict", type="primary"):
             
             st.divider()
             
-            st.subheader("📊 Model Performance Metrics (Test Set)")
+            st.subheader("Model Performance Metrics (Test Set)")
             m1, m2, m3 = st.columns(3)
             m1.metric("R² Score", f"{r2:.4f}")
             m2.metric("RMSE", f"₹{rmse:,.2f}")
@@ -113,6 +113,6 @@ if st.button("🚀 Fetch Data & Predict", type="primary"):
             
             # 7. Optional plot for actual vs prediction overview
             st.divider()
-            st.subheader(f"📈 Test Period Performance ({target_selection})")
+            st.subheader(f"Test Period Performance ({target_selection})")
             chart_data = pd.DataFrame({"Actual": y_test.values, "Predicted": y_pred}, index=y_test.index)
             st.line_chart(chart_data)
